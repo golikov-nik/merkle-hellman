@@ -20,6 +20,7 @@ To view help for input parameters use parameter `-h` or `--help`.
 It will generate public and private keys for encoding messages of length up to 16 and put them in current directory named `mh.privatekey.txt` and `mh.pubkey.txt`.
 2. Let `hello` be the sequence we want to encrypt. Run command:
 `java -jar merkle-hellman.jar en -f mh.pubkey.txt -s hello`
+
 This will print the encrypted string in your terminal.
 3. To decrypt the message, run command:
 `java -jar merkle-hellman.jar de -f mh.privatekey.txt -s <encrypted string>`
