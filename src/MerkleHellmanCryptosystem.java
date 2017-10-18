@@ -147,7 +147,7 @@ public class MerkleHellmanCryptosystem {
 				out.print(decrypted);
 				out.close();
 			} else {
-			System.out.print(decrypted);
+				System.out.print(decrypted);
 			}
 		} else if (cmd.hasOption("url")) {
 			URL url = new URL(cmd.getOptionValue("url"));
@@ -157,7 +157,7 @@ public class MerkleHellmanCryptosystem {
 				out.print(decrypted);
 				out.close();
 			} else {
-			System.out.print(decrypted);
+				System.out.print(decrypted);
 			}
 		} else {
 			formatter.printHelp("decrypter", options);
@@ -220,7 +220,7 @@ public class MerkleHellmanCryptosystem {
 				out.print(encrypted);
 				out.close();
 			} else {
-			System.out.print(encrypted);
+				System.out.print(encrypted);
 			}
 		} else if (cmd.hasOption("url")) {
 			URL url = new URL(cmd.getOptionValue("url"));
@@ -230,7 +230,7 @@ public class MerkleHellmanCryptosystem {
 				out.print(encrypted);
 				out.close();
 			} else {
-			System.out.print(encrypted);
+				System.out.print(encrypted);
 			}
 		} else {
 			formatter.printHelp("encrypter", options);
