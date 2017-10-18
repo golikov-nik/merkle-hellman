@@ -12,6 +12,7 @@ List of modes available:
 - Key generator (kg, keygen)
 - Encryptor (en, encrypt)
 - Decryptor (de, decrypt)
+
 To view help for input parameters use parameter `-h` or `--help`.
 
 # Example
@@ -23,7 +24,7 @@ It will generate public and private keys for encoding messages of length up to 1
 This will print the encrypted string in your terminal.
 3. To decrypt the message, run command:
 `java -jar merkle-hellman.jar de -f mh.privatekey.txt -s <encrypted string>`.
-`hello` will be printed to your terminal.
+`hello` will be printed in your terminal.
 
 # License
 The MIT License (MIT)
