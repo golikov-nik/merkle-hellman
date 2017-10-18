@@ -1,9 +1,5 @@
 # Index
 This repository is the implementation of Merkle-Hellman knapsack cryptosystem in Java. 
-- [Getting started](#getting-started)
-- [Usage](#usage)
-- [Example](#example)
-- [License](#license)
 
 # Getting started
 To run this program you need to have JRE  1.8 or higher installed.
