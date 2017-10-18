@@ -20,6 +20,7 @@ import org.apache.commons.cli.ParseException;
 public class MerkleHellmanCryptosystem {
 
 	public static Key generateKeys(int n, Random rnd) {
+		n *= Character.SIZE;
 		BigInteger sum = randomBigInteger(n, rnd);
 		PrivateKey privateKey = new PrivateKey(n);
 		privateKey.seq[0] = sum;
@@ -43,7 +44,10 @@ public class MerkleHellmanCryptosystem {
 
 	public static BigInteger encrypt(String message, BigInteger[] publicKey) {
 		MyBitSet bitSet = new MyBitSet(message);
-		assert message.length() * Character.SIZE <= publicKey.length;
+		if (message.length() * Character.SIZE > publicKey.length) {
+			System.out.printf("Can't encrypt messages with length > %d with this key.", publicKey.length / Character.SIZE);
+			System.exit(1);
+		}
 		return IntStream.range(0, message.length() * Character.SIZE)
 				.filter(bitSet::get)
 				.mapToObj(i -> publicKey[i])
@@ -256,7 +260,7 @@ public class MerkleHellmanCryptosystem {
 	}
 
 	private static void runKeygen(Options options, String[] args) throws FileNotFoundException {
-		Option length = new Option("len", true , "maximal possible length to be encrypted with your key (default value: 256)");
+		Option length = new Option("len", true , "maximal length of the message to be encrypted with this key (default value: 16)");
 		options.addOption(length);
 		Option outDir = new Option("out", true, "output directory");
 		options.addOption(outDir);
@@ -278,7 +282,7 @@ public class MerkleHellmanCryptosystem {
         	System.exit(0);
         	return;
         }
-        int n = Integer.parseInt(cmd.getOptionValue("len", "256"));
+        int n = Integer.parseInt(cmd.getOptionValue("len", "16"));
         File out = new File(cmd.getOptionValue("out", ""));
         Key key = generateKeys(n, new Random());
         key.saveKey(out);
