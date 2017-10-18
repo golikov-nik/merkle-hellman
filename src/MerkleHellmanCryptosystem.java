@@ -110,6 +110,7 @@ public class MerkleHellmanCryptosystem {
 		Option help = new Option("h", "help-all", false, "print help");
 		options.addOption(help);
 		CommandLineParser parser = new DefaultParser();
+<<<<<<< HEAD
         HelpFormatter formatter = new HelpFormatter();
         CommandLine cmd;
         try {
@@ -141,6 +142,38 @@ public class MerkleHellmanCryptosystem {
         	System.exit(1);
         	return;
         }
+=======
+        	HelpFormatter formatter = new HelpFormatter();
+        	CommandLine cmd;
+        	try {
+            		cmd = parser.parse(options, args);
+        	} catch (ParseException e) {
+            		System.out.println(e.getMessage());
+            		formatter.printHelp("decrypter", options);
+            		System.exit(1);
+            		return;
+        	}
+        	if (cmd.hasOption("h")) {
+        		formatter.printHelp("decrypter", options);
+        		System.exit(0);
+        		return;
+        	}
+        	String message;
+        	if (cmd.hasOption("s") && cmd.hasOption("i")) {
+        		System.out.println("Your input must be either a file or string");
+        		System.exit(1);
+        		return;
+        	} else if (cmd.hasOption("s")) {
+        		message = cmd.getOptionValue("s").trim();
+        	} else if (cmd.hasOption("i")) {
+        		File inp = new File(cmd.getOptionValue("i"));
+        		message = readFile(inp).trim();
+        	} else {
+        		formatter.printHelp("decrypter", options);
+        		System.exit(1);
+        		return;
+        	}
+>>>>>>> 008493ebcb2577f23565c01e9afd076c72558b4c
 		if (cmd.hasOption("f") && cmd.hasOption("url")) {
 			System.out.println("Your private key must be either a file or a url");
 			System.exit(1);
@@ -152,7 +185,7 @@ public class MerkleHellmanCryptosystem {
 				out.print(decrypted);
 				out.close();
 			} else {
-			System.out.print(decrypted);
+				System.out.print(decrypted);
 			}
 		} else if (cmd.hasOption("url")) {
 			URL url = new URL(cmd.getOptionValue("url"));
@@ -162,12 +195,12 @@ public class MerkleHellmanCryptosystem {
 				out.print(decrypted);
 				out.close();
 			} else {
-			System.out.print(decrypted);
+				System.out.print(decrypted);
 			}
 		} else {
 			System.out.println("At least one of the parameters -f and -url must be set.");
 			formatter.printHelp("decrypter", options);
-            System.exit(1);
+            		System.exit(1);
 		}
 	}
 
@@ -185,6 +218,7 @@ public class MerkleHellmanCryptosystem {
 		Option help = new Option("h", "help-all", false, "print help");
 		options.addOption(help);
 		CommandLineParser parser = new DefaultParser();
+<<<<<<< HEAD
         HelpFormatter formatter = new HelpFormatter();
         CommandLine cmd;
         try {
@@ -216,6 +250,38 @@ public class MerkleHellmanCryptosystem {
         	System.exit(1);
         	return;
         }
+=======
+        	HelpFormatter formatter = new HelpFormatter();
+        	CommandLine cmd;
+        	try {
+            		cmd = parser.parse(options, args);
+        	} catch (ParseException e) {
+            		System.out.println(e.getMessage());
+            		formatter.printHelp("encrypter", options);
+            		System.exit(1);
+            		return;
+        	}
+        	if (cmd.hasOption("h")) {
+        		formatter.printHelp("encrypter", options);
+        		System.exit(0);
+        		return;
+        	}
+        	String message;
+        	if (cmd.hasOption("s") && cmd.hasOption("i")) {
+        		System.out.println("Your input must be either a file or string");
+        		System.exit(1);
+        		return;
+        	} else if (cmd.hasOption("s")) {
+        		message = cmd.getOptionValue("s");
+        	} else if (cmd.hasOption("i")) {
+        		File inp = new File(cmd.getOptionValue("i"));
+        		message = readFile(inp);
+        	} else {
+        		formatter.printHelp("encrypter", options);
+        		System.exit(1);
+        		return;
+        	}
+>>>>>>> 008493ebcb2577f23565c01e9afd076c72558b4c
 		if (cmd.hasOption("f") && cmd.hasOption("url")) {
 			System.out.println("Your public key must be either a file or a url");
 			System.exit(1);
@@ -227,7 +293,7 @@ public class MerkleHellmanCryptosystem {
 				out.print(encrypted);
 				out.close();
 			} else {
-			System.out.print(encrypted);
+				System.out.print(encrypted);
 			}
 		} else if (cmd.hasOption("url")) {
 			URL url = new URL(cmd.getOptionValue("url"));
@@ -237,12 +303,12 @@ public class MerkleHellmanCryptosystem {
 				out.print(encrypted);
 				out.close();
 			} else {
-			System.out.print(encrypted);
+				System.out.print(encrypted);
 			}
 		} else {
 			System.out.println("At least one of the parameters -f and -url must be set.");
 			formatter.printHelp("encrypter", options);
-            System.exit(1);
+            		System.exit(1);
 		}
 	}
 
@@ -267,6 +333,7 @@ public class MerkleHellmanCryptosystem {
 		Option help = new Option("h", "help-all", false, "print help");
 		options.addOption(help);
 		CommandLineParser parser = new DefaultParser();
+<<<<<<< HEAD
         HelpFormatter formatter = new HelpFormatter();
         CommandLine cmd;
         try {
@@ -286,5 +353,26 @@ public class MerkleHellmanCryptosystem {
         File out = new File(cmd.getOptionValue("out", ""));
         Key key = generateKeys(n, new Random());
         key.saveKey(out);
+=======
+        	HelpFormatter formatter = new HelpFormatter();
+        	CommandLine cmd;
+        	try {
+            		cmd = parser.parse(options, args);
+        	} catch (ParseException e) {
+            		System.out.println(e.getMessage());
+            		formatter.printHelp("keygen", options);
+            		System.exit(1);
+            		return;
+        	}
+        	if (cmd.hasOption("h")) {
+        		formatter.printHelp("keygen", options);
+        		System.exit(0);
+        		return;
+        	}
+        	int n = Integer.parseInt(cmd.getOptionValue("len", "256"));
+        	File out = new File(cmd.getOptionValue("out", ""));
+        	Key key = generateKeys(n, new Random());
+        	key.saveKey(out);
+>>>>>>> 008493ebcb2577f23565c01e9afd076c72558b4c
 	}
 }
