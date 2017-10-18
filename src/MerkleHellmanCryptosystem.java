@@ -132,6 +132,7 @@ public class MerkleHellmanCryptosystem {
         	File inp = new File(cmd.getOptionValue("i"));
         	message = readFile(inp).trim();
         } else {
+        	System.out.println("At least one of the parameters -s and -i must be set.");
         	formatter.printHelp("decrypter", options);
         	System.exit(1);
         	return;
@@ -160,6 +161,7 @@ public class MerkleHellmanCryptosystem {
 			System.out.print(decrypted);
 			}
 		} else {
+			System.out.println("At least one of the parameters -f and -url must be set.");
 			formatter.printHelp("decrypter", options);
             System.exit(1);
 		}
@@ -205,6 +207,7 @@ public class MerkleHellmanCryptosystem {
         	File inp = new File(cmd.getOptionValue("i"));
         	message = readFile(inp);
         } else {
+        	System.out.println("At least one of the parameters -s and -i must be set.");
         	formatter.printHelp("encrypter", options);
         	System.exit(1);
         	return;
@@ -233,6 +236,7 @@ public class MerkleHellmanCryptosystem {
 			System.out.print(encrypted);
 			}
 		} else {
+			System.out.println("At least one of the parameters -f and -url must be set.");
 			formatter.printHelp("encrypter", options);
             System.exit(1);
 		}
