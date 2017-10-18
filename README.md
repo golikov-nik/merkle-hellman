@@ -7,7 +7,7 @@ Download jar file from [here](https://github.com/golikov-nik/merkle-hellman/rele
 
 # Usage
 Use the following syntax:
-`java -jar merkle-hellman.jar <Mode> [<Input parameters>]`
+`java -jar merkle-hellman.jar <Mode> [<Input parameters>]`  
 List of modes available:
 - Key generator (kg, keygen)
 - Encryptor (en, encrypt)
