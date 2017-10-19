@@ -12,7 +12,6 @@ import java.util.Scanner;
 public class Key {
 	PrivateKey privateKey;
 	private BigInteger[] publicKey;
-
 	Key(BigInteger[] publicKey, PrivateKey privateKey) {
 		this.publicKey = publicKey;
 		this.privateKey = privateKey;

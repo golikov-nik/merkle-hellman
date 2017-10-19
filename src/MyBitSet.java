@@ -1,4 +1,3 @@
-
 import java.util.BitSet;
 
 public class MyBitSet extends BitSet {
