@@ -105,7 +105,7 @@ public class MerkleHellmanCryptosystem {
 		options.addOption(keyFile);
 		Option link = new Option("url", true, "url of the private key");
 		options.addOption(link);
-		Option outOpt = new Option("out", true, "file to write encrypted string to");
+		Option outOpt = new Option("out", true, "file to write decrypted string to");
 		options.addOption(outOpt);
 		Option help = new Option("h", "help-all", false, "print help");
 		options.addOption(help);
