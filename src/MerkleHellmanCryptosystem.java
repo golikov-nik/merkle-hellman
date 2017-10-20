@@ -264,6 +264,9 @@ public class MerkleHellmanCryptosystem {
 		options.addOption(length);
 		Option outDir = new Option("out", true, "output directory");
 		options.addOption(outDir);
+		Option seed = new Option("seed", true, "seed for generating pseudo-random numbers");
+		seed.setType(Long.class);
+		options.addOption(seed);
 		Option help = new Option("h", "help-all", false, "print help");
 		options.addOption(help);
 		CommandLineParser parser = new DefaultParser();
@@ -284,7 +287,13 @@ public class MerkleHellmanCryptosystem {
         }
         int n = Integer.parseInt(cmd.getOptionValue("len", "16"));
         File out = new File(cmd.getOptionValue("out", ""));
-        Key key = generateKeys(n, new Random());
+        Random r;
+        if (cmd.hasOption("seed")) {
+        	r = new Random(Long.parseLong(cmd.getOptionValue("seed")));
+        } else {
+        	r = new Random();
+        }
+        Key key = generateKeys(n, r);
         key.saveKey(out);
 	}
 }
