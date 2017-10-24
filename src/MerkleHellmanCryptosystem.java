@@ -2,10 +2,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Arrays;
-import java.util.Random;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
@@ -19,7 +21,7 @@ import org.apache.commons.cli.ParseException;
 
 public class MerkleHellmanCryptosystem {
 
-	public static Key generateKeys(int n, Random rnd) {
+	public static Key generateKeys(int n, SecureRandom rnd) {
 		n *= Character.SIZE;
 		BigInteger sum = randomBigInteger(n, rnd);
 		PrivateKey privateKey = new PrivateKey(n);
@@ -67,7 +69,7 @@ public class MerkleHellmanCryptosystem {
 		return bitSet.toString();
 	}
 	
-	private static BigInteger randomBigInteger(int length, Random r) {
+	private static BigInteger randomBigInteger(int length, SecureRandom r) {
 		BigInteger n;
 		do {
 			n = new BigInteger(length, r);
@@ -75,7 +77,7 @@ public class MerkleHellmanCryptosystem {
 		return n;
 	}
 
-	public static void main(String[] args) throws IOException{
+	public static void main(String[] args) throws IOException, NoSuchAlgorithmException{
 		if (args.length == 0) {
 			System.out.println("Usage: <mode> <args..>");
 			System.exit(1);
@@ -259,7 +261,7 @@ public class MerkleHellmanCryptosystem {
 		return sb.toString();
 	}
 
-	private static void runKeygen(Options options, String[] args) throws FileNotFoundException {
+	private static void runKeygen(Options options, String[] args) throws FileNotFoundException, NoSuchAlgorithmException, UnsupportedEncodingException {
 		Option length = new Option("len", true , "maximal length of the message to be encrypted with this key (default value: 16)");
 		options.addOption(length);
 		Option outDir = new Option("out", true, "output directory");
@@ -287,11 +289,9 @@ public class MerkleHellmanCryptosystem {
         }
         int n = Integer.parseInt(cmd.getOptionValue("len", "16"));
         File out = new File(cmd.getOptionValue("out", ""));
-        Random r;
+        SecureRandom r = SecureRandom.getInstance("SHA1PRNG");
         if (cmd.hasOption("seed")) {
-        	r = new Random(Long.parseLong(cmd.getOptionValue("seed")));
-        } else {
-        	r = new Random();
+        	r.setSeed(cmd.getOptionValue("seed").getBytes("UTF-8"));
         }
         Key key = generateKeys(n, r);
         key.saveKey(out);
